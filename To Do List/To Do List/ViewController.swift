@@ -15,14 +15,26 @@ class ViewController: UIViewController {
     @IBOutlet weak var editBarButton: UIBarButtonItem!
     @IBOutlet weak var addBarButton: UIBarButtonItem!
     
+    var defaultData = UserDefaults.standard
+    var toDoArray = [String]()
+    var toDoNotesArray = [String]()
     
-    var toDoArray = ["Learn Swift", "Build Apps", "Change the World"]
-    var toDoNotesArray = ["I want to learn swift","I want to build apps", "I want to change the world!"]
+//    var toDoArray = ["Learn Swift", "Build Apps", "Change the World"]
+//    var toDoNotesArray = ["I want to learn swift","I want to build apps", "I want to change the world!"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        
+        toDoArray = defaultData.stringArray(forKey: "toDoArray") ?? [String]()
+        toDoNotesArray = defaultData.stringArray(forKey: "toDoNotesArray") ?? [String]()
+        
+    }
+    
+    func saveDefaultsData(){
+        defaultData.set(toDoArray, forKey: "toDoArray")
+        defaultData.set(toDoNotesArray, forKey: "toDoNotesArray")
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -50,6 +62,7 @@ class ViewController: UIViewController {
             toDoNotesArray.append(sourceViewController.toDoNoteItem!)
             tableView.insertRows(at: [newIndexPath], with: .automatic)
         }
+        saveDefaultsData()
     }
     
     @IBAction func editBarButtonPressed(_ sender: UIBarButtonItem) {
@@ -76,7 +89,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.textLabel?.text = toDoArray[indexPath.row]
-        cell.detailTextLabel?.text = toDoNotesArray[indexPath.row]
+        cell.detailTextLabel?.text = toDoArray[indexPath.row]
         return cell
     }
     
@@ -85,6 +98,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
             toDoArray.remove(at: indexPath.row)
             toDoNotesArray.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            saveDefaultsData()
         }
     }
     
@@ -95,6 +109,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
         toDoNotesArray.remove(at: sourceIndexPath.row)
         toDoArray.insert(itemToMove, at: destinationIndexPath.row)
         toDoNotesArray.insert(noteToMove, at: destinationIndexPath.row)
+        saveDefaultsData()
     }
 
 }
