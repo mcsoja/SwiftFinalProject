@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var addBarButton: UIBarButtonItem!
     
     var defaultsData = UserDefaults.standard
+    var defaultData = UserDefaults.standard
     var toDoArray = [String]()
     var toDoNotesArray = [String]()
     
@@ -26,7 +27,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        
         toDoArray = defaultsData.stringArray(forKey: "toDoArray") ?? [String]()
         toDoNotesArray = defaultsData.stringArray(forKey: "toDoNotesArray") ?? [String]()
     }
@@ -34,6 +34,9 @@ class ViewController: UIViewController {
     func saveDefaultsData(){
         defaultsData.set(toDoArray, forKey: "toDoArray")
         defaultsData.set(toDoNotesArray, forKey: "toDoNotesArray")
+        toDoArray = defaultData.stringArray(forKey: "toDoArray") ?? [String]()
+        toDoNotesArray = defaultData.stringArray(forKey: "toDoNotesArray") ?? [String]()
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -88,7 +91,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.textLabel?.text = toDoArray[indexPath.row]
-        cell.detailTextLabel?.text = toDoNotesArray[indexPath.row]
+        cell.detailTextLabel?.text = toDoArray[indexPath.row]
         return cell
     }
     
