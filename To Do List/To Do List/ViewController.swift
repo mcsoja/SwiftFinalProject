@@ -112,6 +112,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
         toDoArray.insert(itemToMove, at: destinationIndexPath.row)
         toDoNotesArray.insert(noteToMove, at: destinationIndexPath.row)
         saveDefaultsData()
-    }
+    }  
 
 }
