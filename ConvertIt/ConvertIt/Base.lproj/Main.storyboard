@@ -104,6 +104,9 @@
                                             <segment title="0.000"/>
                                             <segment title="none"/>
                                         </segments>
+                                        <connections>
+                                            <action selector="decimalSelected:" destination="BYZ-38-t0r" eventType="valueChanged" id="ZrU-6V-xsc"/>
+                                        </connections>
                                     </segmentedControl>
                                 </subviews>
                                 <constraints>
@@ -139,6 +142,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="decimalSegment" destination="Uh9-Yg-cC7" id="6Ec-CI-073"/>
                         <outlet property="formulaPicker" destination="eQn-ys-A5K" id="0Bg-Kt-rN2"/>
                         <outlet property="fromUnitsLabel" destination="CQn-D4-cqB" id="TLJ-6n-1ab"/>
                         <outlet property="resultsLabel" destination="COE-j1-AhK" id="nSD-K1-zVt"/>
