@@ -75,6 +75,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                <connections>
+                                    <action selector="userInputChanged:" destination="BYZ-38-t0r" eventType="editingChanged" id="Tq2-Jv-AR8"/>
+                                </connections>
                             </textField>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="9Ci-Wv-u8B">
                                 <rect key="frame" x="16" y="61" width="32" height="29"/>
@@ -86,6 +89,9 @@
                                     <segment title="+"/>
                                     <segment title="-"/>
                                 </segments>
+                                <connections>
+                                    <action selector="signSegmentSelected:" destination="BYZ-38-t0r" eventType="valueChanged" id="WTh-6c-DgJ"/>
+                                </connections>
                             </segmentedControl>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yNu-lQ-39j">
                                 <rect key="frame" x="47.333333333333343" y="435" width="280.33333333333326" height="28"/>
@@ -146,6 +152,7 @@
                         <outlet property="formulaPicker" destination="eQn-ys-A5K" id="0Bg-Kt-rN2"/>
                         <outlet property="fromUnitsLabel" destination="CQn-D4-cqB" id="TLJ-6n-1ab"/>
                         <outlet property="resultsLabel" destination="COE-j1-AhK" id="nSD-K1-zVt"/>
+                        <outlet property="signedSegment" destination="9Ci-Wv-u8B" id="0Z8-J8-gXH"/>
                         <outlet property="userInput" destination="Cda-lo-3Le" id="645-QX-2kQ"/>
                     </connections>
                 </viewController>
