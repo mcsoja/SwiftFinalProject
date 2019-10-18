@@ -3,4 +3,6 @@ target 'WeatherGift' do
   pod 'GooglePlaces'
   pod 'GoogleMaps'
   pod 'Alamofire', '~> 4.9'
+  pod 'SwiftyJSON'
+  pod 'GooglePlacePicker'
 end
