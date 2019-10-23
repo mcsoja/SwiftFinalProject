@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A2043A82360B16E00F18D82 /* HourlyWeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2043A72360B16E00F18D82 /* HourlyWeatherCell.swift */; };
 		0A3C38B6235FDC4F0060740E /* DayWeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3C38B5235FDC4F0060740E /* DayWeatherCell.swift */; };
 		0A3C38B8235FE9F50060740E /* TimeInterval+format.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3C38B7235FE9F50060740E /* TimeInterval+format.swift */; };
 		0A3C924C2339B70E005B3FE7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3C924B2339B70E005B3FE7 /* AppDelegate.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A2043A72360B16E00F18D82 /* HourlyWeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyWeatherCell.swift; sourceTree = "<group>"; };
 		0A3C38B5235FDC4F0060740E /* DayWeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayWeatherCell.swift; sourceTree = "<group>"; };
 		0A3C38B7235FE9F50060740E /* TimeInterval+format.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+format.swift"; sourceTree = "<group>"; };
 		0A3C92482339B70E005B3FE7 /* WeatherGift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherGift.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -79,6 +81,7 @@
 				0A3C925D2339B771005B3FE7 /* DetailVC.swift */,
 				0A3C38B7235FE9F50060740E /* TimeInterval+format.swift */,
 				0A3C38B5235FDC4F0060740E /* DayWeatherCell.swift */,
+				0A2043A72360B16E00F18D82 /* HourlyWeatherCell.swift */,
 				0A3C925F2339BB76005B3FE7 /* ListVC.swift */,
 				0A8979D52359646D000A2067 /* Constants.swift */,
 				0A3C924F2339B70E005B3FE7 /* Main.storyboard */,
@@ -222,6 +225,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A3C38B6235FDC4F0060740E /* DayWeatherCell.swift in Sources */,
+				0A2043A82360B16E00F18D82 /* HourlyWeatherCell.swift in Sources */,
 				0AABDF222357C541006A0DEB /* WeatherLocation.swift in Sources */,
 				0A3C92602339BB76005B3FE7 /* ListVC.swift in Sources */,
 				0A3C92622339BDB3005B3FE7 /* PageVC.swift in Sources */,
