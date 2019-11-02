@@ -9,11 +9,26 @@
 import UIKit
 
 class ItemDetailViewController: UIViewController {
-
+    @IBOutlet weak var partyItemField: UITextField!
+    @IBOutlet weak var personResponsibleField: UITextField!
+    @IBOutlet weak var saveBarButton: UIBarButtonItem!
+    
+    var partyListItem: PartyListItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        if partyListItem == nil {
+            partyListItem = PartyListItem(partyItem: "", personResponsible: "")
+        }
+        
+        partyItemField.text = partyListItem.partyItem
+        personResponsibleField.text = partyListItem.personResponsible
         // Do any additional setup after loading the view.
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        partyListItem.partyItem = partyItemField.text!
+        partyListItem.personResponsible = personResponsibleField.text!
     }
     
     
