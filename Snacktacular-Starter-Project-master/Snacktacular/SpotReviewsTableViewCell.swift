@@ -12,6 +12,19 @@ class SpotReviewsTableViewCell: UITableViewCell {
 
     @IBOutlet weak var reviewTitleLabel: UILabel!
     @IBOutlet weak var reviewTextLabel: UILabel!
+    @IBOutlet var starImageCollection: [UIImageView]!
     
-
+    
+    var review: Review! {
+        didSet {
+            reviewTitleLabel.text = review.title
+            reviewTextLabel.text = review.text
+            
+            for star in starImageCollection {
+                let image = UIImage.init(named: (star.tag < review.rating ? "star-filled" : "star-empty"))
+                star.image = image
+            }
+        }
+    }
+    
 }

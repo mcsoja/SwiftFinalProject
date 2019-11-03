@@ -20,14 +20,14 @@ class ReviewTableViewController: UITableViewController {
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var buttonsBackgroundView: UIView!
     @IBOutlet weak var reviewDateLabel: UILabel!
-    @IBOutlet var starButttonCollection: [UIButton]!
+    @IBOutlet var starButtonCollection: [UIButton]!
     
     var spot: Spot!
     var review: Review!
     
     var rating = 0 {
         didSet {
-            for star in starButttonCollection {
+            for star in starButtonCollection {
                 let image = UIImage.init(named: (star.tag < rating ? "star-filled" : "star-empty"))
                 star.setImage(image, for: .normal)
                     
