@@ -24,13 +24,15 @@ class SpotsListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-           print("VIEW")
-           getLocation()
-           spots.loadData {
-               self.sortBasedOnSegmentPressed()
-               self.tableView.reloadData()
-           }
-       }
+        print("VIEW")
+        getLocation()
+        navigationController?.setToolbarHidden(false, animated: false)
+        
+        spots.loadData {
+            self.sortBasedOnSegmentPressed()
+            self.tableView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +47,7 @@ class SpotsListViewController: UIViewController {
         spots = Spots()
         
     }
- 
+    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -55,8 +57,8 @@ class SpotsListViewController: UIViewController {
     func signIn() {
         print("SIGN IN")
         let providers: [FUIAuthProvider] = [
-          FUIGoogleAuth(),
-          FUIEmailAuth(),
+            FUIGoogleAuth(),
+            FUIEmailAuth(),
         ]
         if authUI.auth?.currentUser == nil {
             self.authUI?.providers = providers
@@ -161,11 +163,11 @@ extension SpotsListViewController: FUIAuthDelegate {
     func application(_ app: UIApplication, open url: URL,
                      options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
         let sourceApplication = options[UIApplication.OpenURLOptionsKey.sourceApplication] as! String?
-      if FUIAuth.defaultAuthUI()?.handleOpen(url, sourceApplication: sourceApplication) ?? false {
-        return true
-      }
-      // other URL handling goes here.
-      return false
+        if FUIAuth.defaultAuthUI()?.handleOpen(url, sourceApplication: sourceApplication) ?? false {
+            return true
+        }
+        // other URL handling goes here.
+        return false
     }
     
     func authUI(_ authUI: FUIAuth, didSignInWith user: User?, error: Error?) {
@@ -197,7 +199,7 @@ extension SpotsListViewController: CLLocationManagerDelegate{
     func getLocation() {
         locationManager = CLLocationManager()
         locationManager.delegate = self
-            
+        
     }
     
     func handleLocationAuthorizationStatus(status: CLAuthorizationStatus) {
