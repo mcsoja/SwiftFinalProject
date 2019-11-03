@@ -24,6 +24,7 @@ class SpotDetailViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     
     var spot: Spot!
+    var reviews: [Review] = []
     
     var regionDistance: CLLocationDistance = 750 //750 meters half mile
     var locationManager: CLLocationManager!
@@ -56,6 +57,28 @@ class SpotDetailViewController: UIViewController {
         let region = MKCoordinateRegion(center: spot.coordinate, latitudinalMeters: regionDistance, longitudinalMeters: regionDistance)
         mapView.setRegion(region, animated: true)
         updateUserInterface()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        spot.name = nameField.text!
+        spot.address = addressField.text!
+        switch segue.identifier ?? "" {
+        case "AddReview":
+            let navigationController = segue.destination as! UINavigationController
+            let destination = navigationController.viewControllers.first as! ReviewTableViewController
+            destination.spot = spot
+            if let selectedIndexPath = tableView.indexPathForSelectedRow {
+                tableView.deselectRow(at: selectedIndexPath, animated: true)
+            }
+        case "ShowReview":
+            let destination = segue.destination as! ReviewTableViewController
+            destination.spot = spot
+            let selectedIndexPath = tableView.indexPathForSelectedRow!
+            destination.review = reviews[selectedIndexPath.row]
+            
+        default:
+            print("Did not have a segue")
+        }
     }
     
     func showAlert(title: String, message: String) {
@@ -105,6 +128,7 @@ class SpotDetailViewController: UIViewController {
     }
     
     @IBAction func reviewButtonPressed(_ sender: UIButton) {
+        performSegue(withIdentifier: "AddReview", sender: nil)
     }
     
     @IBAction func lookupPlacePressed(_ sender: UIBarButtonItem) {

@@ -21,24 +21,14 @@ class SpotsListViewController: UIViewController {
     var locationManager: CLLocationManager!
     var currentLocation: CLLocation!
     
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        print("VIEW")
-        getLocation()
-        navigationController?.setToolbarHidden(false, animated: false)
-        
-        spots.loadData {
-            self.sortBasedOnSegmentPressed()
-            self.tableView.reloadData()
-        }
-    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         authUI = FUIAuth.defaultAuthUI()
         // You need to adopt a FUIAuthDelegate protocol to receive callback
-        authUI.delegate = self
+        authUI?.delegate = self
+        
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -46,6 +36,17 @@ class SpotsListViewController: UIViewController {
         
         spots = Spots()
         
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print("VIEW")
+        getLocation()
+        navigationController?.setToolbarHidden(false, animated: false)
+        spots.loadData {
+            self.sortBasedOnSegmentPressed()
+            self.tableView.reloadData()
+        }
     }
     
     
