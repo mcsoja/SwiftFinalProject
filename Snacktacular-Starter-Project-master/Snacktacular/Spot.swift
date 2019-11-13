@@ -91,9 +91,9 @@ class Spot: NSObject, MKAnnotation {
             var ref: DocumentReference? = nil
             ref = db.collection("spots").addDocument(data: dataToSave) { error in
                 if let error = error {
-                    
                     completed(false)
                 } else {
+                    self.documentID = ref!.documentID
                     completed(true)
                 }
                 

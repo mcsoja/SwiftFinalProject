@@ -48,7 +48,7 @@ class Review {
     
     convenience init() {
         let currentUserID = Auth.auth().currentUser?.email ?? "Unknown User"
-        self.init(title: "", text: "", rating: 0, reviewUserID: "currentUserID", date: Date(), documentID: "")
+        self.init(title: "", text: "", rating: 0, reviewUserID: "\(currentUserID)", date: Date(), documentID: "")
     }
     
     

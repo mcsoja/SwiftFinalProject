@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class ReviewTableViewController: UITableViewController {
     
@@ -24,6 +25,7 @@ class ReviewTableViewController: UITableViewController {
     
     var spot: Spot!
     var review: Review!
+    let dateFormatter = DateFormatter()
     
     var rating = 0 {
         didSet {
@@ -42,15 +44,76 @@ class ReviewTableViewController: UITableViewController {
         tap.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tap)
         
-        guard let spot = spot else {
+        guard spot != nil else {
             return
         }
-        nameLabel.text = spot.name
-        addressLabel.text = spot.address
         
         if review == nil {
             review = Review()
         }
+        updateUserInterface()
+    }
+    
+    func updateUserInterface() {
+        nameLabel.text = spot.name
+        addressLabel.text = spot.address
+        rating = review.rating
+        reviewTitleLabel.text = review.title
+        enableDisableSaveButton()
+        reviewView.text = review.text
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
+        reviewDateLabel.text = "posted: \(dateFormatter.string(from: review.date))"
+        if review.documentID == "" {
+            addBordersToEditableObjects()
+        } else {
+            if review.reviewUserID == Auth.auth().currentUser?.email {
+                self.navigationItem.leftItemsSupplementBackButton = false
+                self.saveBarButton.title = "Update"
+                addBordersToEditableObjects()
+                deleteButton.isHidden = false
+            } else {
+                cancelBarButton.title = ""
+                saveBarButton.title = ""
+                postedByLabel.text = "Posted by: \(review.reviewUserID)"
+                for star in starButtonCollection {
+                    star.backgroundColor = UIColor.white
+                    star.adjustsImageWhenDisabled = false
+                    star.isEnabled = false
+                    reviewTitleLabel.isEnabled = false
+                    reviewView.isEditable = false
+                    reviewTitleLabel.backgroundColor = UIColor.white
+                    reviewView.backgroundColor = UIColor.white
+                }
+                
+            }
+        }
+    }
+    
+    func addBordersToEditableObjects() {
+        reviewTitleLabel.addBorder(width: 0.5, radius: 5.0, color: .black)
+        reviewView.addBorder(width: 0.5, radius: 5.0, color: .black)
+        buttonsBackgroundView.addBorder(width: 0.5, radius: 5.0, color: .black)
+    }
+    
+    func enableDisableSaveButton() {
+        if reviewTitleLabel.text != "" {
+            saveBarButton.isEnabled = true
+        } else {
+            saveBarButton.isEnabled = false
+        }
+    }
+    
+    func saveThenSegue() {
+        review.title = reviewTitleLabel.text!
+               review.text = reviewView.text!
+               review.saveData(spot: spot) { (success) in
+                   if success {
+                       self.leaveViewController()
+                   } else {
+                       print("ERROR save")
+                   }
+               }
     }
     
     func leaveViewController () {
@@ -68,15 +131,7 @@ class ReviewTableViewController: UITableViewController {
     
 
     @IBAction func saveButtonPressed(_ sender: UIBarButtonItem) {
-        review.title = reviewTitleLabel.text!
-        review.text = reviewView.text!
-        review.saveData(spot: spot) { (success) in
-            if success {
-                self.leaveViewController()
-            } else {
-                print("ERROR save")
-            }
-        }
+        saveThenSegue()
     }
     
     @IBAction func cancelButtonPresses(_ sender: UIBarButtonItem) {
@@ -86,9 +141,11 @@ class ReviewTableViewController: UITableViewController {
     @IBAction func deleteButtonPressed(_ sender: UIButton) {
     }
     @IBAction func reviewTitleChanged(_ sender: UITextField) {
+        enableDisableSaveButton()
     }
     
     @IBAction func returnTitleDonePressed(_ sender: UITextField) {
+        saveThenSegue()
     }
     
     
