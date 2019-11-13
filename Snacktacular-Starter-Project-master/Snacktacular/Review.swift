@@ -18,7 +18,7 @@ class Review {
     var documentID: String
     
     var dictionary: [String: Any] {
-        return ["title": title, "text": text, "rating": rating, "reviewUserID": reviewUserID, "date": date, "documentID": documentID]
+        return ["title": title, "text": text, "rating": rating, "reviewUserID": reviewUserID, "date": date]
     }
     
     
@@ -62,7 +62,9 @@ class Review {
                 if let error = error {
                     completed(false)
                 } else {
+                    spot.updateAverageRating {
                     completed(true)
+                    }
                 }
             }
         } else {
@@ -72,7 +74,9 @@ class Review {
                     
                     completed(false)
                 } else {
+                    spot.updateAverageRating {
                     completed(true)
+                    }
                 }
                 
             }
@@ -85,7 +89,9 @@ class Review {
             if let error = error {
                 print("*** ERROR")
             } else {
-                completed(true)
+                spot.updateAverageRating {
+                    completed(true)
+                }
             }
         }
             
