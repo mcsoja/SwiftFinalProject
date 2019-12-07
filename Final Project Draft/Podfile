@@ -1,0 +1,8 @@
+platform :ios, '11.0'
+
+source 'https://github.com/CocoaPods/Specs.git'
+target 'Final Project Draft' do
+  use_frameworks!
+    pod 'SwiftyJSON', '~> 4.0'
+    pod 'Alamofire', '~> 4.7'
+end
